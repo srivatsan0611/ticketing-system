@@ -100,8 +100,13 @@ PATCH /api/tickets/:id/assign
    Incredibly Basic UI using a simple flow for example: OnClick() -> getTicket() 
   ![image](https://github.com/user-attachments/assets/9a4e4059-b8c7-48b6-98ac-a2d15b7ecb09)
 
-2. Ticket Comments 
+2. Ticket Comments
 
+   - Attempted -> Not functional yet.
+   - Created a "comments" table in the Schema - Referencing the initial Tickets table as a Foreign Key
+   - Wrote the API endpoints and routers separately for the same.
+  
+Thank you for your time and consideration!
 
 
 
