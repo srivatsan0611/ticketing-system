@@ -117,7 +117,7 @@ Key entities -> Dockerfile, .dockerignore
   - After you've built the image, create an isolated running instance of the application using the command
 
   ```
-  docker build -t ticketing-system .
+  docker run -p 5000:5000 ticketing-system
   ```
   The API will now be accessible at ``` http://localhost:5000/api/tickets ```
 
