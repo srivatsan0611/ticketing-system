@@ -30,4 +30,15 @@ export async function initDB() {
       FOREIGN KEY(assignedTo) REFERENCES users(id)
     );
   `);
+
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS comments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      ticketId INTEGER,
+      comment TEXT,
+      createdAt TEXT,
+      FOREIGN KEY(ticketId) REFERENCES tickets(id)
+    )
+  `);
+
 }
