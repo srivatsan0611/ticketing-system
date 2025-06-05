@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Ticketing System</title>
+  <meta charset="UTF-8" />
+  <title>Mini Ticketing System</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>All Tickets</h1>
-  <ul id="ticketList"></ul>
+  <h1>Ticketing System</h1>
 
-  <h2>Create Ticket</h2>
-  <input type="text" id="title" placeholder="Title" />
-  <input type="text" id="description" placeholder="Description" />
-  <input type="text" id="createdBy" placeholder="User ID" />
-  <button onclick="createTicket()">Create</button>
+  <div class="form-section">
+    <h2>Create Ticket</h2>
+    <input id="title" placeholder="Title" />
+    <input id="description" placeholder="Description" />
+    <input id="createdBy" placeholder="Created By (User ID)" />
+    <button onclick="createTicket()">Create</button>
+  </div>
+
+  <div class="form-section">
+    <h2>Update Ticket</h2>
+    <input id="updateId" placeholder="Ticket ID" />
+    <input id="newStatus" placeholder="New Status (open/in_progress/closed)" />
+    <input id="newDescription" placeholder="New Description" />
+    <button onclick="updateTicket()">Update</button>
+  </div>
+
+  <div class="form-section">
+    <h2>Assign Ticket</h2>
+    <input id="assignId" placeholder="Ticket ID" />
+    <input id="assignTo" placeholder="Support Engineer User ID" />
+    <button onclick="assignTicket()">Assign</button>
+  </div>
+
+  <div class="form-section">
+    <h2>Delete Ticket</h2>
+    <input id="deleteId" placeholder="Ticket ID" />
+    <button onclick="deleteTicket()">Delete</button>
+  </div>
+
+  <div>
+    <h2>All Tickets</h2>
+    <button onclick="getTickets()">Refresh</button>
+    <div id="tickets"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
