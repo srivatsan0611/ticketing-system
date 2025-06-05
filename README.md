@@ -105,7 +105,24 @@ PATCH /api/tickets/:id/assign
    - Attempted -> Not functional yet.
    - Created a "comments" table in the Schema - Referencing the initial Tickets table as a Foreign Key
    - Wrote the API endpoints and routers separately for the same.
-  
+
+3. Dockerization
+
+Key entities -> Dockerfile, .dockerignore
+  - Use the Dockerfile Config mentioned to build a docker image using the command 
+  ```
+  docker build -t ticketing-system .
+  ```
+
+  - After you've built the image, create an isolated running instance of the application using the command
+
+  ```
+  docker build -t ticketing-system .
+  ```
+  The API will now be accessible at ``` http://localhost:5000/api/tickets ```
+
+
+
 Thank you for your time and consideration!
 
 
