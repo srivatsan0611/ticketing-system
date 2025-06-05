@@ -121,6 +121,14 @@ Key entities -> Dockerfile, .dockerignore
   ```
   The API will now be accessible at ``` http://localhost:5000/api/tickets ```
 
+4. Load Balancing System
+
+Done in extremely simple 3 steps - Assuming that an existing support engineer can handle unlimited no of tickets. (SQL Logic)
+
+- Get all support engineers
+- Count assigned tickets for each engineer
+- Create the ticket and auto-assign to engineer with least assignments
+
 
 
 Thank you for your time and consideration!

@@ -2,19 +2,47 @@
 import { connectDB } from '../db.js';
 
 export async function createTicket(req, res) {
-  try {
-    const { title, description, createdBy, status = 'open' } = req.body;
-    const db = await connectDB();
-    const createdAt = new Date().toISOString();
+  const { title, description, createdBy } = req.body;
+  const status = 'open';
+  const createdAt = new Date().toISOString();
+  const updatedAt = createdAt;
 
-    await db.run(
-      `INSERT INTO tickets (title, description, status, createdAt, updatedAt, createdBy) VALUES (?, ?, ?, ?, ?, ?)`,
-      [title, description, status, createdAt, createdAt, createdBy]
+  try {
+    const db = await connectDB();
+
+    // Get all support engineers
+    const supportEngineers = await db.all(`SELECT id FROM users WHERE role = 'support'`);
+
+    if (supportEngineers.length === 0) {
+      return res.status(400).json({ error: 'No support engineers available' });
+    }
+
+    // Count assigned tickets for each engineer
+    let minAssigned = Number.MAX_VALUE;
+    let selectedEngineerId = null;
+
+    for (const engineer of supportEngineers) {
+      const { count } = await db.get(
+        `SELECT COUNT(*) as count FROM tickets WHERE assignedTo = ?`,
+        [engineer.id]
+      );
+
+      if (count < minAssigned) {
+        minAssigned = count;
+        selectedEngineerId = engineer.id;
+      }
+    }
+
+    // 3. Create the ticket and auto-assign to least-burdened engineer
+    const result = await db.run(
+      `INSERT INTO tickets (title, description, status, createdAt, updatedAt, createdBy, assignedTo)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, description, status, createdAt, updatedAt, createdBy, selectedEngineerId]
     );
 
-    res.status(201).json({ message: 'Ticket created successfully' });
+    res.status(201).json({ message: 'Ticket created', ticketId: result.lastID });
   } catch (err) {
-    console.error('Create Ticket Error:', err.message);
+    console.error(err);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
