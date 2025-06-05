@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+input, textarea {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+.ticket {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
